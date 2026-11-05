@@ -23,6 +23,7 @@ import {
   IMAGE_ASPECT_RATIO_OPTIONS,
   CouncilMode,
 } from '@/lib/duck-protocol';
+import { apiUrl } from '@/lib/base-path';
 
 interface ChatComposerProps {
   prompt: string;
@@ -143,7 +144,7 @@ export function ChatComposer({
 
         setIsTranscribing(true);
         try {
-          const res = await fetch('/api/duckvoice/dictation', {
+          const res = await fetch(apiUrl('/api/duckvoice/dictation'), {
             method: 'POST',
             headers: { 'x-model': selectedModel },
             body: blob,

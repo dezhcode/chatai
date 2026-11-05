@@ -38,6 +38,7 @@ import {
   LiveVoiceModal,
   LiveVoiceTurn,
 } from '@/components/live-voice-modal';
+import { apiUrl } from '@/lib/base-path';
 
 interface ConversationRecord {
   id: string;
@@ -422,7 +423,7 @@ export default function DuckAIChatApp() {
     let generatedImg: UIMessage['generatedImage'] = undefined;
 
     try {
-      const res = await fetch('/api/duckchat', {
+      const res = await fetch(apiUrl('/api/duckchat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -693,7 +694,7 @@ export default function DuckAIChatApp() {
       promptText: string,
       onToken: (fullText: string) => void
     ): Promise<string> => {
-      const res = await fetch('/api/duckchat', {
+      const res = await fetch(apiUrl('/api/duckchat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
