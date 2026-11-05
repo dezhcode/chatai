@@ -14,6 +14,7 @@ import {
   Hand,
 } from 'lucide-react';
 import { DuckHistoryMessage } from '@/lib/duck-protocol';
+import { apiUrl } from '@/lib/base-path';
 
 export interface LiveVoiceTurn {
   role: 'user' | 'assistant';
@@ -217,7 +218,7 @@ export function LiveVoiceModal({
           ? `[دستورالعمل و نقش تو: ${systemPromptRef.current.trim()}]\n`
           : '';
 
-        const chatRes = await fetch('/api/duckchat', {
+        const chatRes = await fetch(apiUrl('/api/duckchat'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -378,7 +379,7 @@ export function LiveVoiceModal({
         setStatusText('در حال تفکر...');
 
         try {
-          const dictRes = await fetch('/api/duckvoice/dictation', {
+          const dictRes = await fetch(apiUrl('/api/duckvoice/dictation'), {
             method: 'POST',
             headers: { 'x-model': selectedModel },
             body: audioBlob,
@@ -569,7 +570,7 @@ export function LiveVoiceModal({
 
         const journeyId =
           Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
-        const iceRes = await fetch(`/api/duckvoice/session?journeyId=${journeyId}`);
+        const iceRes = await fetch(apiUrl(`/api/duckvoice/session?journeyId=${journeyId}`));
         const iceData = await iceRes.json();
         const iceServers = iceData.iceServers || [
           { urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302'] },
@@ -763,7 +764,7 @@ export function LiveVoiceModal({
           }
         });
 
-        const sessRes = await fetch('/api/duckvoice/session', {
+        const sessRes = await fetch(apiUrl('/api/duckvoice/session'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

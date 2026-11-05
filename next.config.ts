@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
     ],
   },
   output: 'standalone',
+  // استقرار زیر یک مسیر (مثلا /chatai): هنگام build، NEXT_PUBLIC_BASE_PATH=/chatai. بدون آن روی ریشه.
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
   serverExternalPackages: ['jsdom', 'sharp'],
   transpilePackages: ['motion'],
   webpack: (config, {dev}) => {
