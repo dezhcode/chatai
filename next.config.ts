@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
     ],
   },
   output: 'standalone',
+  // ریشه ردیابی فایل ها همین پوشه پروژه باشد تا خروجی standalone مسیر تو در تو نگیرد.
+  outputFileTracingRoot: process.cwd(),
   // استقرار زیر یک مسیر (مثلا /chatai): هنگام build، NEXT_PUBLIC_BASE_PATH=/chatai. بدون آن روی ریشه.
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
   serverExternalPackages: ['jsdom', 'sharp'],
